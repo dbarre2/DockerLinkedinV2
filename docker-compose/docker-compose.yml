@@ -1,0 +1,64 @@
+version: '2'
+services:
+    conversationservice-app:
+        image: conversationservice
+        environment:
+            - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            - 'SPRING_PROFILES_ACTIVE=prod,swagger'
+            - 'EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka'
+            - 'SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config'
+            - 'SPRING_DATA_MONGODB_URI=mongodb://conversationservice-mongodb:27017'
+            - SPRING_DATA_MONGODB_DATABASE=conversationService
+            - JHIPSTER_SLEEP=30
+            - JHIPSTER_REGISTRY_PASSWORD=admin
+    conversationservice-mongodb:
+        image: 'mongo:4.0.2'
+    
+    experienceservice-app:
+        image: experienceservice
+        environment:
+            - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            - 'SPRING_PROFILES_ACTIVE=prod,swagger'
+            - 'EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka'
+            - 'SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config'
+            - 'SPRING_DATA_MONGODB_URI=mongodb://experienceservice-mongodb:27017'
+            - SPRING_DATA_MONGODB_DATABASE=ExperienceService
+            - JHIPSTER_SLEEP=30
+            - JHIPSTER_REGISTRY_PASSWORD=admin
+    experienceservice-mongodb:
+        image: 'mongo:4.0.2'
+    
+    feedservice-app:
+        image: feedservice
+        environment:
+            - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            - 'SPRING_PROFILES_ACTIVE=prod,swagger'
+            - 'EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka'
+            - 'SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config'
+            - 'SPRING_DATA_MONGODB_URI=mongodb://feedservice-mongodb:27017'
+            - SPRING_DATA_MONGODB_DATABASE=feedService
+            - JHIPSTER_SLEEP=30
+            - JHIPSTER_REGISTRY_PASSWORD=admin
+    feedservice-mongodb:
+        image: 'mongo:4.0.2'
+    
+    epikedin2-app:
+        image: epikedin2
+        environment:
+            - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            - 'SPRING_PROFILES_ACTIVE=prod,swagger'
+            - 'EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka'
+            - 'SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config'
+            - 'SPRING_DATA_MONGODB_URI=mongodb://epikedin2-mongodb:27017'
+            - SPRING_DATA_MONGODB_DATABASE=epikedin2
+            - JHIPSTER_SLEEP=30
+            - JHIPSTER_REGISTRY_PASSWORD=admin
+        ports:
+            - '8080:8080'
+    epikedin2-mongodb:
+        image: 'mongo:4.0.2'
+    
+    jhipster-registry:
+        extends:
+            file: jhipster-registry.yml
+            service: jhipster-registry
